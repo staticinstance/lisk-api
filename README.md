@@ -517,7 +517,8 @@ All parameters joins by OR.
 }
 ```
 
-### Get blockchain fee percent
+### Get blockchain fee
+Get transaction fee for sending "normal" transactions.
 
 ```js
 var liskAPI = require("lisk-api");
@@ -531,7 +532,7 @@ liskAPI.getBlockchainFeePercent(function(err, success, response){
 ```
 {
   "success": true,
-  "fee": "fee percent"
+  "fee": "fee amount"
 }
 ```
 
