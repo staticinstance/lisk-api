@@ -523,7 +523,7 @@ Get transaction fee for sending "normal" transactions.
 ```js
 var liskAPI = require("lisk-api");
 
-liskAPI.getBlockchainFeePercent(function(err, success, response){
+liskAPI.getBlockchainFee(function(err, success, response){
   console.log(response);
 });
 ```

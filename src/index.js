@@ -41,7 +41,7 @@ module.exports = {
     //Block
     getBlock: Block.getBlock,
     getBlocks: Block.getBlocks,
-    getBlockchainFeePercent: Block.getBlockchainFeePercent,
+    getBlockchainFee: Block.getBlockchainFee,
     getBlockchainHeight: Block.getBlockchainHeight,
     getForgedByAccount: Block.getForgedByAccount,
 

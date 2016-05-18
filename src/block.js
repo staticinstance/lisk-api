@@ -43,7 +43,7 @@ Block.getBlocks = function(qs, callback) {
         });
 };
 
-Block.getBlockchainFeePercent = function(callback) {
+Block.getBlockchainFee = function(callback) {
     request({
             url: options.url + '/api/blocks/getFee',
             json: true
