@@ -769,10 +769,10 @@ liskAPI.disableForging("secret key of delegate account",
 ```
 
 ## Dapps
-Dapp API.
+Dapps API.
 
 ### Dapps
-Register dapp.
+Registers a dapp.
 
 **Request**
 ```js
@@ -782,15 +782,13 @@ var data = {
   "secret": "Secret of account. String. Required",
   "secondSecret": "Second secret of account. String. Optional",
   "publicKey": "Public key to verify sender secret key. Hex. Optional",
-  "category": "Category of DApp. Integer. Required",
-  "name": "Name of DApp. String. Required",
-  "description": "Description of DApp. String. Optional",
-  "tags": "Tags of DApp. String. Optional",
-  "type": "Type of DApp, now supported only 0 type. Integer. Required",
-  "siaAscii": "ASCII code of sia shared file. String. Optional",
-  "git": "Link to git repository. String. Optional",
-  "icon": "Link to icon file. PNG and JPG/JPEG supported. String. Optional",
-  "siaIcon": "ASCII code of sia shared icon file. String. Optional"
+  "category": "DApp category. Integer. Required",
+  "name": "DApp name. String. Required",
+  "description": "DApp description. String. Optional",
+  "tags": "DApp tags. String. Optional",
+  "type": "DApp type. Integer. Required (Only type 0 is currently supported)",
+  "link": "Link to DApp file. ZIP supported. String. Required",
+  "icon": "Link to icon file. PNG and JPG/JPEG supported. String. Optional"
 }
 
 liskAPI.registerDapp(data, function(error, success, response) {
@@ -802,25 +800,25 @@ liskAPI.registerDapp(data, function(error, success, response) {
 ```
 {
   "success": true,
-  "transactionId": "id of transaction"
+  "transactionId": "transaction id"
 }
 ```
 
 ### Get dapps
-Get specifc dapps.
+Gets a list of dapps registered on the network.
 
 **Request**
 ```js
 var liskAPI = require("lisk-api");
 
 var parameters = {
-  "category: Category of DApp. (Integer)",
-  "name: Name of DApp. (String)",
-  "type: Type of DApp. (Integer)",
-  "git: Git repository link to DApp. (String)",
-  "limit: Limit of dapps in query. Maximum is 100. (Integer)",
-  "offset: Offset of dapps in query. (Integer)",
-  "orderBy: Order by field. (String)"
+  "category": "DApp category. (Integer)",
+  "name": "DApp name. (String)",
+  "type": "DApp type. (Integer)",
+  "link": "DApp link. (String)",
+  "limit": "Query limit. Maximum is 100. (Integer)",
+  "offset": "Query offset. (Integer)",
+  "orderBy": "Order by field. (String)"
 }
 
 liskAPI.getDapps(parameters, function(error, success, response) {
@@ -832,12 +830,12 @@ liskAPI.getDapps(parameters, function(error, success, response) {
 ```
 {
   "success": true,
-  "dapps": "Array of dapps"
+  "dapps": "array of dapps"
 }
 ```
 
 ### Get dapp
-Get a specifc dapp.
+Gets a specific dapp by id.
 
 **Request**
 ```js
@@ -852,23 +850,24 @@ liskAPI.getDaap("id: Id of dapp", function(error, success, response) {
 ```
 {
   "success": true,
-  "dapp": "dapp"
+  "dapp": "dapp object"
 }
 ```
 
-### Search dapp store
-Get specifc dapps.
+### Search for dapps
+Searches for dapps by keyword(s).
 
 **Request**
 ```js
 var liskAPI = require("lisk-api");
 
-liskAPI.searchDappStore("q: Query to search. (String)",
-                      "category: Category to search. (Integer)",
-                      "installed: Search only in installed dapps. 1 or 0. (Integer)",
+liskAPI.searchDappStore("q: Search criteria. (String)",
+                      "Category to search within. (Integer)",
+                      "installed: Search installed dapps only. 1 or 0. (Integer)",
                       function(error, success, response) {
     console.log(response);
 });
+
 ```
 
 **Response**
@@ -882,13 +881,13 @@ liskAPI.searchDappStore("q: Query to search. (String)",
 ```
 
 ### Install dapp
-Will install dapp on your node.
+Installs a dapp by id on the node.
 
 **Request**
 ```js
 var liskAPI = require("lisk-api");
 
-liskAPI.installDapp("id of dapp", function(error, success, response) {
+liskAPI.installDapp("dapp id to install", function(error, success, response) {
     console.log(response);
 });
 ```
@@ -897,12 +896,12 @@ liskAPI.installDapp("id of dapp", function(error, success, response) {
 ```
 {
   "success": true,
-  "path": "path of installed dapp"
+  "path": "dappp install path"
 }
 ```
 
 ### Installed dapps
-Return list of installed dapps.
+Returns a list of installed dapps on the requested node.
 
 **Request**
 ```js
@@ -924,7 +923,7 @@ liskAPI.installedDapps(function(error, success, response) {
 ```
 
 ### Installed dapps Ids
-Return list of installed dapps ids.
+Returns a list of installed dapp ids on the requested node.
 
 **Request**
 ```js
@@ -946,13 +945,13 @@ liskAPI.installedDappsIds(function(error, success, response) {
 ```
 
 ### Uninstall dapps
-Will uninstall dapp from your node.
+Uninstalls a dapp by id from the requested node.
 
 **Request**
 ```js
 var liskAPI = require("lisk-api");
 
-liskAPI.uninstallDapp("id of dapp", function(error, success, response) {
+liskAPI.uninstallDapp("dapp id to uninstall", function(error, success, response) {
     console.log(response);
 });
 ```
@@ -965,13 +964,13 @@ liskAPI.uninstallDapp("id of dapp", function(error, success, response) {
 ```
 
 ### Launch dapp
-It will launch dapp on your node.
+Launches a dapp by id on the requested node.
 
 **Request**
 ```js
 var liskAPI = require("lisk-api");
 
-liskAPI.launchDapp("id of dapp", function(error, success, response) {
+liskAPI.launchDapp("dapp id to launch", function(error, success, response) {
     console.log(response);
 });
 ```
@@ -984,7 +983,7 @@ liskAPI.launchDapp("id of dapp", function(error, success, response) {
 ```
 
 ### Installing
-Will return dapps that in installing right now.
+Returns a list of dapp ids currently being installed on the requested node.
 
 **Request**
 ```js
@@ -1000,13 +999,13 @@ liskAPI.installing(function(error, success, response) {
 {
   "success": true,
   "installing": [
-    "ids of dapps that installing"
+    "array of dapp ids"
   ]
 }
 ```
 
 ### Launched
-Will return launched dapps.
+Returns a list of dapp ids which are currently launched on the requested node.
 
 **Request**
 ```js
@@ -1022,13 +1021,13 @@ liskAPI.launched(function(error, success, response) {
 {
   "success": true,
   "launched": [
-    "list of launched dapps ids"
+    "array of dapp ids"
   ]
 }
 ```
 
 ### Categories
-Will return categories of dapps.
+Returns a full list of dapp categories.
 
 **Request**
 ```js
@@ -1043,18 +1042,18 @@ liskAPI.categories(function(error, success, response) {
 ```
 {
   "success": true,
-  "category": "object with names and ids of dapps categories"
+  "category": "object containing category names and ids"
 }
 ```
 
 ### Stop dapp
-Will stop dapp on your node.
+Stops a dapp by id on the requested node.
 
 **Request**
 ```js
 var liskAPI = require("lisk-api");
 
-liskAPI.stopDapp("id of dapp", function(error, success, response) {
+liskAPI.stopDapp("dapp id to stop", function(error, success, response) {
     console.log(response);
 });
 ```
