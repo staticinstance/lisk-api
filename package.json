@@ -1,6 +1,6 @@
 {
   "name": "lisk-api",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Node.JS module, which provides an wrapper for the Lisk API.",
   "main": "src/index.js",
   "scripts": {
