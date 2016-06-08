@@ -3,7 +3,7 @@
  */
 
 var options = {
-    url: 'https://testnet.lisk.io',
+    url: 'https://login.lisk.io',
 }
 
 module.exports = options;
